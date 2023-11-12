@@ -20,7 +20,7 @@ const ImageUploadPage = () => {
 
   return (
     <div>
-      <h1>Image Upload Page</h1>
+      <h1>Segment Anything Model</h1>
       <input type="file" onChange={handleImageChange} />
       {image && (
         <div>
