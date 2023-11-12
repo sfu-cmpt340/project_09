@@ -1,35 +1,35 @@
-// ImageUploadPage.jsx
+// // ImageUploadPage.jsx
 
-import React, { useState } from 'react';
+// import React, { useState } from 'react';
 
-const ImageUploadPage = () => {
-  const [image, setImage] = useState(null);
+// const ImageUploadPage = () => {
+//   const [image, setImage] = useState(null);
 
-  const handleImageChange = (e) => {
-    const file = e.target.files[0];
-    const reader = new FileReader();
+//   const handleImageChange = (e) => {
+//     const file = e.target.files[0];
+//     const reader = new FileReader();
 
-    reader.onloadend = () => {
-      setImage(reader.result);
-    };
+//     reader.onloadend = () => {
+//       setImage(reader.result);
+//     };
 
-    if (file) {
-      reader.readAsDataURL(file);
-    }
-  };
+//     if (file) {
+//       reader.readAsDataURL(file);
+//     }
+//   };
 
-  return (
-    <div>
-      <h1>Segment Anything Model</h1>
-      <input type="file" onChange={handleImageChange} />
-      {image && (
-        <div>
-          <h2>Preview:</h2>
-          <img src={image} alt="Uploaded" style={{ maxWidth: '100%', maxHeight: '300px' }} />
-        </div>
-      )}
-    </div>
-  );
-};
+//   return (
+//     <div>
+//       <h1>Segment Anything Model</h1>
+//       <input type="file" onChange={handleImageChange} />
+//       {image && (
+//         <div>
+//           <h2>Preview:</h2>
+//           <img src={image} alt="Uploaded" style={{ maxWidth: '100%', maxHeight: '300px' }} />
+//         </div>
+//       )}
+//     </div>
+//   );
+// };
 
-export default ImageUploadPage;
+// export default ImageUploadPage;
