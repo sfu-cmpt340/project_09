@@ -18,7 +18,8 @@ class App extends Component {
     const fd = new FormData();
     fd.append('image', this.state.selectedFile, this.state.selectedFile.name);
     // insert the firebase url below!
-    axios.post('#INSERT URL HERE', fd, {
+    const post_endpoint = "https://us-central1-project-09-e4dd7.cloudfunctions.net/uploadFile";
+    axios.post(post_endpoint, fd, {
       onUploadProgress: progressEvent => {
         console.log('Upload Progress: ' + Math.round((progressEvent.loaded / progressEvent.total) * 100) + '%');
       }
