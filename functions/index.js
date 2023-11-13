@@ -13,6 +13,7 @@ const {Storage} = require("@google-cloud/storage");
 // // Create and Deploy Your First Cloud Functions
 // // https://firebase.google.com/docs/functions/write-firebase-functions
 //
+
 exports.onFileChange = functions.storage.object().onFinalize((event) => {
   const bucket = event.bucket;
   const contentType = event.contentType;
@@ -40,7 +41,7 @@ exports.onFileChange = functions.storage.object().onFinalize((event) => {
       })
       .then(() => {
         return spawn("convert",
-            [tmpFilePath, "-resize", "500x500", tmpFilePath]);
+            [tmpFilePath, "-resize", "1000x1000", tmpFilePath]);
       })
       .then(() => {
         return destBucket.upload(tmpFilePath, {
@@ -50,23 +51,22 @@ exports.onFileChange = functions.storage.object().onFinalize((event) => {
       });
 });
 
+
 exports.uploadFile = functions.https.onRequest((req, res) => {
-  console.log("starting function");
   cors(req, res, () => {
     if (req.method !== "POST") {
       return res.status(500).json({
         message: "Not allowed",
       });
     }
-    console.log("starting upload");
     const bb = busboy({headers: req.headers});
     let uploadData = null;
 
     bb.on("file", (fieldname, file, filename, encoding, mimetype) => {
+      console.log("starting upload");
       const filepath = path.join(os.tmpdir(), filename.filename);
       uploadData = {file: filepath, type: mimetype};
       file.pipe(fs.createWriteStream(filepath));
-      console.log("on file successful");
     });
 
     bb.on("close", () => {
@@ -97,5 +97,4 @@ exports.uploadFile = functions.https.onRequest((req, res) => {
     req.pipe(bb);
     bb.end(req.rawBody);
   });
-  res.status(200).send("OK");
 });
