@@ -58,6 +58,48 @@ repository
 
 ## 2. Installation
 
+## SAM setup 
+
+The code requires python>=3.8, as well as pytorch>=1.7 and torchvision>=0.8
+Python: 
+PyTorch on Windows only supports Python 3.8-3.11, not sure about Macs
+versions can be found at https://www.python.org/downloads/
+
+
+Pytorch and Torchvision: 
+https://pytorch.org/get-started/locally/#windows-installation
+To ensure that PyTorch was installed correctly, we can verify the installation by running sample PyTorch code. Here we will construct a randomly initialized tensor.
+
+```import torch
+x = torch.rand(5, 3)
+print(x)
+```
+
+
+The output should be something similar to:
+```
+tensor([[0.3380, 0.3845, 0.3217],
+        [0.8337, 0.9050, 0.2650],
+        [0.2979, 0.7141, 0.9069],
+        [0.1449, 0.1132, 0.1375],
+        [0.4675, 0.3947, 0.1426]])
+```
+
+SAM:
+```
+pip install git+https://github.com/facebookresearch/segment-anything.git
+```
+
+Need to have downloaded: https://dl.fbaipublicfiles.com/segment_anything/sam_vit_h_4b8939.pth
+and then have the file in the same directory as the code 
+
+
+Dependencies:
+```
+pip install opencv-python matplotlib
+pip install numpy
+```
+##
 Provide sufficient instructions to reproduce and install your project. 
 Provide _exact_ versions, test on CSIL or reference workstations.
 
