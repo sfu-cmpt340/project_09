@@ -12,6 +12,7 @@ class App extends Component {
     this.setState({
       selectedFile: event.target.files[0]
     })
+    console.log(event.target.files[0])
   }
 
   fileUploadHandler = () => {
@@ -32,6 +33,14 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+        <div className="imagePreview">
+          {/* only render the image if not null */}
+          {this.state.selectedFile != null && <img src={URL.createObjectURL(this.state.selectedFile)} />}
+        </div>
+
+        <div className="returnedImage">
+        </div>
+
         <div className="uploadButtons">
           <input type="file" onChange={this.fileSelectedHandler}/>
           <button onClick={this.fileUploadHandler}>Upload</button>
