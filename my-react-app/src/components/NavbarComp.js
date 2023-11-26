@@ -32,6 +32,7 @@ export default class NavbarComp extends Component {
         </Navbar>
         <div>
             <Routes>
+                <Route index element={<Home/>}></Route>
                 <Route path="/home" element={<Home/>}></Route>
                 <Route path="/modifiedpictures" element={<ModifiedPictures/>}></Route>
             </Routes>
