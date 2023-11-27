@@ -70,7 +70,8 @@ Pytorch and Torchvision:
 https://pytorch.org/get-started/locally/#windows-installation
 To ensure that PyTorch was installed correctly, we can verify the installation by running sample PyTorch code. Here we will construct a randomly initialized tensor.
 
-```import torch
+```
+import torch
 x = torch.rand(5, 3)
 print(x)
 ```
