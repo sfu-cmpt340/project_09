@@ -98,6 +98,7 @@ Dependencies:
 ```
 pip install opencv-python matplotlib
 pip install numpy
+pip install pydicom
 ```
 ##
 Provide sufficient instructions to reproduce and install your project. 
