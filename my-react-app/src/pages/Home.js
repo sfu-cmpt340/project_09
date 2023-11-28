@@ -7,12 +7,12 @@ export default function Home() {
     const [imageUpload, setImageUpload] = useState(null);
 
     const handleImageFinishedUploading  = () => {
-        alert('Image finished uploading!');
+        alert('Image finished uploading! Please check the Processed Images Tab in a few minutes for your segmented image!');
     }
 
     const fileSelectedHandler = event => {
         setImageUpload(event.target.files[0]);
-      }
+    }
     
       const fileUploadHandler = () => {
         if(imageUpload == null) return;
@@ -33,17 +33,14 @@ export default function Home() {
     
     return (
         <div className = "mainContainer">
-            <h2>Upload an Image!</h2>
+            <h2 style={{marginTop:"20px"}}>Upload an Image!</h2>
             <div className="imagePreview">
                 {/* only render the image if not null */}
                 {imageUpload != null && <img src={URL.createObjectURL(imageUpload)} />}
-                </div>
+            </div>
 
-                <div className="returnedImage">
-                </div>
-
-                <div className="uploadButtons">
-                <input type="file"/>
+            <div className="uploadButtons">
+                <input type="file" onChange={fileSelectedHandler}/>
                 <button onClick={fileUploadHandler}>Upload</button>
             </div>
         </div>

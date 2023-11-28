@@ -7,7 +7,7 @@
 }
 
 .uploadButtons{
-  margin-top:40%;
+  margin-top: 20px;
 }
 
 .App-logo {
@@ -37,9 +37,10 @@
 }
 
 .imagePreview {
-  max-width: 40%;
-  max-height: 40%;
-  
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+  height: 60vh;
 }
 
 .imagePreview img {
