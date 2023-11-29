@@ -27,7 +27,7 @@ const Gallery = ({imageList}) => {
 
     let filteredImgList = [];
     for (let imageUrl of imageList){
-        if(filteredImgList.includes(imageUrl) === false && imageUrl.includes('resized')){
+        if(filteredImgList.includes(imageUrl) === false && imageUrl.includes('annotated_')){
             filteredImgList.push(imageUrl);
         }
     }
