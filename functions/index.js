@@ -1,10 +1,10 @@
 const functions = require("firebase-functions");
 const os = require("os");
 const path = require("path");
-const spawn = require("child-process-promise").spawn;
 const cors = require("cors")({origin: true});
 const busboy = require("busboy");
 const fs = require("fs");
+const axios = require("axios");
 
 const keyFilename = "project-09-e4dd7-firebase-adminsdk-508df-4fb4827183.json";
 
@@ -14,9 +14,7 @@ const {Storage} = require("@google-cloud/storage");
 // // https://firebase.google.com/docs/functions/write-firebase-functions
 //
 
-exports.onFileChange = functions.storage.object().onFinalize((event) => {
-  const bucket = event.bucket;
-  const contentType = event.contentType;
+exports.SAM = functions.storage.object().onFinalize(async (event) => {
   const filePath = event.name;
 
   console.log("File change detected, function execution started");
@@ -26,29 +24,26 @@ exports.onFileChange = functions.storage.object().onFinalize((event) => {
     return;
   }
 
-  if (path.basename(filePath).startsWith("resized-")) {
+  if (path.basename(filePath).startsWith("annotated_")) {
     console.log("We already renamed that file!");
     return;
   }
-  const storage = new Storage({keyFilename: keyFilename});
-  const destBucket = storage.bucket(bucket);
-  const tmpFilePath = path.join(os.tmpdir(), path.basename(filePath));
-  const metadata = {contentType: contentType};
-  return destBucket
-      .file(filePath)
-      .download({
-        destination: tmpFilePath,
-      })
-      .then(() => {
-        return spawn("convert",
-            [tmpFilePath, "-resize", "1000x1000", tmpFilePath]);
-      })
-      .then(() => {
-        return destBucket.upload(tmpFilePath, {
-          destination: "resized-" + path.basename(filePath),
-          metadata: metadata,
-        });
-      });
+  try {
+    // Define the path of the image in Firebase Storage
+    const imagePath = filePath; // Replace with your image path
+
+    const pythonServerUrl = `http://127.0.0.1:5000/process_and_upload?imagePath=${encodeURIComponent(imagePath)}`;
+
+    const response = await axios.get(pythonServerUrl);
+
+    // Handle the response from the Python server if needed
+    console.log(response.data); // Log the response from the Python server
+
+    return null;
+  } catch (error) {
+    console.error("Error sending GET request to Python server:", error);
+    return null;
+  }
 });
 
 
