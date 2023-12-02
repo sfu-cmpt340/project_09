@@ -1,6 +1,7 @@
 import { React, useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import DicomViewer from '../components/DicomViewer';
 
 export default function Home() {
 
@@ -12,6 +13,7 @@ export default function Home() {
 
     const fileSelectedHandler = event => {
         setImageUpload(event.target.files[0]);
+        console.log(event.target.files[0]);
     }
     
       const fileUploadHandler = () => {
@@ -36,13 +38,14 @@ export default function Home() {
             <h2 style={{marginTop:"20px"}}>Upload an Image!</h2>
             <div className="imagePreview">
                 {/* only render the image if not null */}
-                {imageUpload != null && <img src={URL.createObjectURL(imageUpload)} />}
+                {/* {imageUpload != null && <img src={URL.createObjectURL(imageUpload)} />} */}
+                <DicomViewer/>
             </div>
 
-            <div className="uploadButtons">
+            {/* <div className="uploadButtons">
                 <input type="file" onChange={fileSelectedHandler}/>
                 <button onClick={fileUploadHandler}>Upload</button>
-            </div>
+            </div> */}
         </div>
     )
 }
