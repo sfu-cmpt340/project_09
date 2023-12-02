@@ -1,0 +1,3 @@
+[submodule "my-react-app/src/dwv-react"]
+	path = my-react-app/src/dwv-react
+	url = https://github.com/ivmartel/dwv-react.git
