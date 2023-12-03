@@ -430,34 +430,38 @@ class DwvComponent extends React.Component {
     }
   }
 
-  /**
-   * Handle a drop event.
-   * @param {DragEvent} event The event to handle.
-   */
-  onDrop = (event) => {
-    this.defaultHandleDragEvent(event);
-    // load files
-    this.state.dwvApp.loadFiles(event.dataTransfer.files);
-    console.log(event.dataTransfer.files[0]);
-    // send a POST request to send it to firebase
+  // /**
+  //  * Handle a drop event.
+  //  * @param {DragEvent} event The event to handle.
+  //  */
+  // onDrop = (event) => {
+  //   this.defaultHandleDragEvent(event);
+  //   // load files
+  //   this.state.dwvApp.loadFiles(event.dataTransfer.files);
+  //   console.log(event.dataTransfer.files[0]);
+  //   // send a POST request to send it to firebase
 
-    const fd = new FormData();
-    fd.append('image', event.dataTransfer.files[0],event.dataTransfer.files[0].name);
-    // insert the firebase url below!
-    const post_endpoint = "https://us-central1-project-09-e4dd7.cloudfunctions.net/uploadFile";
-    axios.post(post_endpoint, fd, {
-      onUploadProgress: progressEvent => {
-        // console.log('Upload Progress: ' + Math.round((progressEvent.loaded / progressEvent.total) * 100) + '%');
-      }
-    })
-      .then(res => {
-        console.log('successfully sent the image to database!');
-    })
+  //   const fd = new FormData();
+  //   fd.append('image', event.dataTransfer.files[0], event.dataTransfer.files[0].name);
+  //   // insert the firebase url below!
+  //   const post_endpoint = "https://us-central1-project-09-e4dd7.cloudfunctions.net/uploadFile";
+  //   axios.post(post_endpoint, fd, {
+  //     onUploadProgress: progressEvent => {
+  //       console.log('Upload Progress: ' + Math.round((progressEvent.loaded / progressEvent.total) * 100) + '%');
+  //     }
+  //   })
+  //     .then(res => {
+  //       console.log(event.dataTransfer.files[0].name)
+  //       // console.log('successfully sent the image to database!');
+  //       // const flask_endpoint = "http://127.0.0.1:5000/home";
+  //       // const data = { data: event.dataTransfer.files[0].name };
+  //       // axios.post(flask_endpoint,data);
+  //   })
     
-      .catch(err => {
-        alert('error sending image to database, please try again.');
-      });
-  }
+  //     .catch(err => {
+  //       alert('error sending image to database, please try again.');
+  //     });
+  // }
 
   /**
    * Handle a an input[type:file] change event.
@@ -475,11 +479,15 @@ class DwvComponent extends React.Component {
       const post_endpoint = "https://us-central1-project-09-e4dd7.cloudfunctions.net/uploadFile";
       axios.post(post_endpoint, fd, {
         onUploadProgress: progressEvent => {
-          // console.log('Upload Progress: ' + Math.round((progressEvent.loaded / progressEvent.total) * 100) + '%');
+           console.log('Upload Progress: ' + Math.round((progressEvent.loaded / progressEvent.total) * 100) + '%');
         }
       })
         .then(res => {
           console.log('successfully sent the image to database!');
+          const flask_endpoint = "http://127.0.0.1:5000/home";
+          const data = { data: event.target.files[0].name };
+          axios.post(flask_endpoint,data);
+
       })
       
         .catch(err => {
@@ -505,7 +513,7 @@ class DwvComponent extends React.Component {
       // check content
       if (box.innerHTML === '') {
         const p = document.createElement('p');
-        p.appendChild(document.createTextNode('Drag and drop data here or '));
+        // p.appendChild(document.createTextNode('Drag and drop data here or '));
         // input file
         const input = document.createElement('input');
         input.onchange = this.onInputFile;
@@ -518,7 +526,7 @@ class DwvComponent extends React.Component {
         const label = document.createElement('label');
         label.htmlFor = 'input-file';
         const link = document.createElement('a');
-        link.appendChild(document.createTextNode('click here'));
+        link.appendChild(document.createTextNode('Click Here to Upload a DICOM Image'));
         link.id = 'input-file-link';
         label.appendChild(link);
         p.appendChild(input);
