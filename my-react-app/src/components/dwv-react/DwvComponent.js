@@ -447,11 +447,14 @@ class DwvComponent extends React.Component {
     const post_endpoint = "https://us-central1-project-09-e4dd7.cloudfunctions.net/uploadFile";
     axios.post(post_endpoint, fd, {
       onUploadProgress: progressEvent => {
-        // console.log('Upload Progress: ' + Math.round((progressEvent.loaded / progressEvent.total) * 100) + '%');
+        console.log('Upload Progress: ' + Math.round((progressEvent.loaded / progressEvent.total) * 100) + '%');
       }
     })
       .then(res => {
         console.log('successfully sent the image to database!');
+        const flask_endpoint = "http://127.0.0.1:5000/home";
+        const data = { data: event.target.files[0].name };
+        axios.post(flask_endpoint,data);
     })
     
       .catch(err => {
@@ -475,11 +478,15 @@ class DwvComponent extends React.Component {
       const post_endpoint = "https://us-central1-project-09-e4dd7.cloudfunctions.net/uploadFile";
       axios.post(post_endpoint, fd, {
         onUploadProgress: progressEvent => {
-          // console.log('Upload Progress: ' + Math.round((progressEvent.loaded / progressEvent.total) * 100) + '%');
+           console.log('Upload Progress: ' + Math.round((progressEvent.loaded / progressEvent.total) * 100) + '%');
         }
       })
         .then(res => {
           console.log('successfully sent the image to database!');
+          const flask_endpoint = "http://127.0.0.1:5000/home";
+          const data = { data: event.target.files[0].name };
+          axios.post(flask_endpoint,data);
+
       })
       
         .catch(err => {
