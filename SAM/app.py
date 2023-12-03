@@ -9,6 +9,7 @@ import numpy as np
 import cv2
 import pydicom
 import matplotlib.pyplot as plt
+plt.switch_backend('Agg')
 from unicodedata import normalize
 import time
 
@@ -20,7 +21,7 @@ app = Flask(__name__)
 CORS(app)
 
 
-cred = credentials.Certificate('..\\functions\project-09-e4dd7-firebase-adminsdk-508df-4fb4827183.json')
+cred = credentials.Certificate('../functions/project-09-e4dd7-firebase-adminsdk-508df-4fb4827183.json')
 store = firebase_admin.initialize_app(cred,{
     'storageBucket':"project-09-e4dd7.appspot.com"
 })
@@ -92,7 +93,7 @@ def runImage():
     data = request.json
     name = data.get('data')
     print(name)
-    #time.sleep(5) 
+    time.sleep(20)
     runSAM(name)
     return jsonify(data)
     
