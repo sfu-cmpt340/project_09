@@ -10,10 +10,7 @@ import cv2
 import pydicom
 import matplotlib.pyplot as plt
 plt.switch_backend('Agg')
-from unicodedata import normalize
 import time
-
-import requests
 
 
 HOME = os.getcwd()
