@@ -52,9 +52,11 @@ const Gallery = ({imageList}) => {
 
         <div className="gallery">
             {filteredImgList?.map((item, index)=>{
+                const imagename = item.split("annotated_")[1].split(".")[0]
                 return(
                     <div className="pics" key={index} onClick={() => getImg(item)}>
                         <img src={item} style={{width: '100%'}} />
+                        <p> {imagename} </p>
                     </div>
                 )
             })}
