@@ -1,10 +1,13 @@
 #!/bin/bash
 
-# Run Flask app
-gnome-terminal --title="Flask App" -- bash -c 'cd SAM && flask run'
+# Get the directory of the script
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+# Run Flask app in a new terminal window
+gnome-terminal --working-directory="$DIR/SAM" -- bash -c "flask run; exec bash"
 
 # Wait for Flask to start (adjust the sleep duration as needed)
 sleep 5
 
-# Run React app
-gnome-terminal --title="React App" -- bash -c 'cd my-react-app && npm start'
+# Run React app in a new terminal window
+gnome-terminal --working-directory="$DIR/my-react-app" -- bash -c "npm start; exec bash"
