@@ -12,23 +12,25 @@ import matplotlib.pyplot as plt
 plt.switch_backend('Agg')
 import time
 
-
+#Create flask app for backend with CORS for cross platform functionality
 HOME = os.getcwd()
 app = Flask(__name__)
 CORS(app)
 
-
+#connect to firebase database
 cred = credentials.Certificate('../functions/project-09-e4dd7-firebase-adminsdk-508df-4fb4827183.json')
 store = firebase_admin.initialize_app(cred,{
     'storageBucket':"project-09-e4dd7.appspot.com"
 })
 
+#sam setup 
 CHECKPOINT_PATH = os.path.join(HOME, "sam_vit_h_4b8939.pth")
-DEVICE = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
-MODEL_TYPE = "vit_h"
+DEVICE = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu') #uses GPU for processing if availible, CPU if not
+MODEL_TYPE = "vit_h"    #model type used for SAM
 sam = sam_model_registry[MODEL_TYPE](checkpoint=CHECKPOINT_PATH).to(device=DEVICE)
 mask_generator = SamAutomaticMaskGenerator(sam)
 
+#connects all the segmented images together to form original photo
 def show_anns(anns):
     if len(anns) == 0:
         return
@@ -44,6 +46,7 @@ def show_anns(anns):
         img[m] = color_mask
     ax.imshow(img)
 
+#grabs the dicom file and processes it into an image 
 def prepare_dicoms(dcm_file,show=False):
     dicom_file_data = pydicom.dcmread(dcm_file).pixel_array
     
@@ -60,7 +63,8 @@ def prepare_dicoms(dcm_file,show=False):
     opencv_image = cv2.cvtColor(uint8_image, cv2.COLOR_GRAY2BGR)
     return opencv_image
 
-
+#Grabs a dicom from firebase with a given name and turns the dicom into a image to process with SAM
+#saves both the dicom and the segmented image into images folder and uploads the segmented image to firebase
 def runSAM(name):
     bucket = storage.bucket()
     blob = bucket.get_blob(name)
@@ -84,13 +88,13 @@ def runSAM(name):
     blob2 = bucket.blob(newName)
     blob2.upload_from_filename(newPath)
 
-
+#backend server that gets filename when dicom uploaded and runs SAM function on it
 @app.route('/home', methods=['POST'])
 def runImage():
     data = request.json
     name = data.get('data')
     print(name)
-    time.sleep(20)
+    time.sleep(20)  #wait for firebase to update its storage after upload completed
     runSAM(name)
     return jsonify(data)
     
