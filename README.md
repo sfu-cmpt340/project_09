@@ -54,7 +54,8 @@ repository
 
 The code requires the following dependencies:
 1. Python version 3.9 - 3.11 (3.12 will not work!)
-2. Node.js 
+2. Node.js
+(Make sure that you also have npm installed)
 
 Clone the repository onto your computer
 
