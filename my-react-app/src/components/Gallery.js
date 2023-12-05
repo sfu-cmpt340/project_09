@@ -56,7 +56,9 @@ const Gallery = ({imageList}) => {
                 return(
                     <div className="pics" key={index} onClick={() => getImg(item)}>
                         <img src={item} style={{width: '100%'}} />
-                        <p> {imagename} </p>
+                        <div className='text-on-image'>
+                            <p> {imagename} </p>
+                        </div>
                     </div>
                 )
             })}

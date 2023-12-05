@@ -86,3 +86,9 @@
     color: #ffffff;
     cursor: pointer;
 }
+
+.text-on-image {
+    display: block;
+    text-align: center; /* This aligns the text within its container */
+}
+  
