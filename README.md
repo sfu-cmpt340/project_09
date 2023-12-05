@@ -1,18 +1,13 @@
-# SFU CMPT 340 Project Template -- Replace with project title (SAM Segmentation Machine)
-This repository is a template for your CMPT 340 course project.
-Replace the title with your project title, and **add a snappy acronym that people remember (mnemonic)**.
+# SFU CMPT 340 - SAM Segmentation Machine (SAM SM)
+SAM Segmentation Machine is a full stack web application created by Mathew Tse, Raymond Kong, Alex Simpson, Jody Tao, Oliver Ng-Young-Lim.
+This web app allows users to upload a DICOM image and the segmented image will be returned in the 'processed images' page.  
 
-Add a 1-2 line summary of your project here.
 
 ## Important Links
 
-| [Timesheet](https://google.com) | [Slack channel](https://google.com) | [Project report](https://google.com) |
+| [Timesheet](https://1sfu-my.sharepoint.com/:x:/g/personal/kabhishe_sfu_ca/EfPw-6yhhaNMjL7N1J2hK7MBpV-RSoG_9ocsgho20TwK2g?e=2bi2Im) | [Slack channel](https://app.slack.com/client/T05JYJAF22G/C05T7MA6T6J/docs/Qp:F05U3C2D1CG) | [Project report](https://www.overleaf.com/project/650ca0c0dcd3d7eb38ba626b) |
 |-----------|---------------|-------------------------|
 
-
-- Timesheet: Link your timesheet (pinned in your project's Slack channel) where you track per student the time and tasks completed/participated for this project/
-- Slack channel: Link your private Slack project channel.
-- Project report: Link your Overleaf project report document.
 
 
 ## Video/demo/GIF
@@ -26,115 +21,83 @@ Record a short video (1:40 - 2 minutes maximum) or gif or a simple screen record
 
 3. [Reproducing this project](#repro)
 
-4. [Guidance](#guide)
-
-
 <a name="demo"></a>
 ## 1. Example demo
 
 A minimal example to showcase your work
 
-```python
-from amazing import amazingexample
-imgs = amazingexample.demo()
-for img in imgs:
-    view(img)
-```
+Home Page with Lung Image Uploaded
+<img width="800" alt="Screen Shot 2023-12-04 at 10 50 19 PM" src="https://github.com/sfu-cmpt340/project_09/assets/88808907/06abb21f-c580-45bc-b9c2-a2bd13f5bd4f">
+
+Processed Segmented Images
+
+<img width="800" alt="Screen Shot 2023-12-04 at 10 52 03 PM" src="https://github.com/sfu-cmpt340/project_09/assets/88808907/38d0a0d7-11ae-4680-8309-5509f6679c01">
 
 ### What to find where
 
-Explain briefly what files are found where
+File Directory Layout:
 
 ```bash
 repository
-├── src                          ## source code of the package itself
-├── scripts                      ## scripts, if needed
-├── docs                         ## If needed, documentation   
+├── functions                         ## Firebase credentials and cloud functions on file upload
+├── my-react-app                     ## source code of React frontend 
+├── SAM                        	## source code of SAM code and flask backend 
 ├── README.md                    ## You are here
-├── requirements.yml             ## If you use conda
 ```
 
 <a name="installation"></a>
 
 ## 2. Installation
 
-## SAM setup 
 
-The code requires python>=3.8, as well as pytorch>=1.7 and torchvision>=0.8
-Python: 
-PyTorch on Windows only supports Python 3.8-3.11, not sure about Macs
-versions can be found at https://www.python.org/downloads/
+### SAM and backend setup 
 
+The code requires the following dependencies:
+1. Python version 3.9 - 3.11 (3.12 will not work!)
+2. Node.js 
 
-Pytorch and Torchvision: 
-https://pytorch.org/get-started/locally/#windows-installation
-To ensure that PyTorch was installed correctly, we can verify the installation by running sample PyTorch code. Here we will construct a randomly initialized tensor.
+Clone the repository onto your computer
 
+Download the file below by pasting this URL into your browser
+https://dl.fbaipublicfiles.com/segment_anything/sam_vit_h_4b8939.pth
+Copy and paste this file into the project, inside of the SAM folder
+
+SAM and backend Dependencies:
+CD into the SAM Directory and run
 ```
-import torch
-x = torch.rand(5, 3)
-print(x)
-```
-
-
-The output should be something similar to:
-```
-tensor([[0.3380, 0.3845, 0.3217],
-        [0.8337, 0.9050, 0.2650],
-        [0.2979, 0.7141, 0.9069],
-        [0.1449, 0.1132, 0.1375],
-        [0.4675, 0.3947, 0.1426]])
+pip install -r requirements.txt
 ```
 
-SAM:
-```
-pip install git+https://github.com/facebookresearch/segment-anything.git
-```
+### Frontend React setup
+CD into the my-react-app directory and run
+npm install
 
-Need to have downloaded: https://dl.fbaipublicfiles.com/segment_anything/sam_vit_h_4b8939.pth
-and then have the file in the same directory as the code 
-
-
-Dependencies:
-```
-pip install opencv-python matplotlib
-pip install numpy
-pip install pydicom
-```
-##
-Provide sufficient instructions to reproduce and install your project. 
-Provide _exact_ versions, test on CSIL or reference workstations.
-
-```bash
-git clone $THISREPO
-cd $THISREPO
-conda env create -f requirements.yml
-conda activate amazing
-```
+Congratulations! You have finished installing the project! Run instructions are in the reproduction section below
 
 <a name="repro"></a>
 ## 3. Reproduction
-Demonstrate how your work can be reproduced, e.g. the results in your report.
-```bash
-mkdir tmp && cd tmp
-wget https://yourstorageisourbusiness.com/dataset.zip
-unzip dataset.zip
-conda activate amazing
-python evaluate.py --epochs=10 --data=/in/put/dir
-```
-Data can be found at ...
-Output will be saved in ...
+
+### On Windows:
+
+1. Open project_09 folder in your file explorer, and double click to run WindowsApp.bat
+2. Open your browser and go to the URL localhost:3000
+
+### Mac/Linux
+1. Open project_09 folder in your terminal, and type: sh MacOSApp.sh on Mac. Type sh Linux.sh on Linux.
+2. Open your browser and go to the URL localhost:3000
+   
+### Alternatively, if the above didn't work:
+
+1. Open a new terminal
+2. cd into my-react-app
+3. npm run start -> React front end should now be running
+4. Open a new terminal
+5. cd into SAM
+6. python app.py -> Flask backend should now be running
+7. Wait until you see the message: Running on http://127.0.0.1:5000
+8. Open your browser and type in the URL: localhost:3000
+9. You should now be able to see the application running!
+10. To upload a file, click on the ‘Click Here to Upload a DICOM Image’ and select your DICOM image
+11. Once your DICOM images have been uploaded, wait up to 15 minutes for the segmented image to appear on the Modified Images tab. 
 
 <a name="guide"></a>
-## 4. Guidance
-
-- Use [git](https://git-scm.com/book/en/v2)
-    - Do NOT use history re-editing (rebase)
-    - Commit messages should be informative:
-        - No: 'this should fix it', 'bump' commit messages
-        - Yes: 'Resolve invalid API call in updating X'
-    - Do NOT include IDE folders (.idea), or hidden files. Update your .gitignore where needed.
-    - Do NOT use the repository to upload data
-- Use [VSCode](https://code.visualstudio.com/) or a similarly powerful IDE
-- Use [Copilot for free](https://dev.to/twizelissa/how-to-enable-github-copilot-for-free-as-student-4kal)
-- Sign up for [GitHub Education](https://education.github.com/) 
