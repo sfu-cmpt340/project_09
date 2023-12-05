@@ -94,7 +94,7 @@ def runImage():
     data = request.json
     name = data.get('data')
     print(name)
-    time.sleep(20)  #wait for firebase to update its storage after upload completed
+    time.sleep(30)  #wait for firebase to update its storage after upload completed
     runSAM(name)
     return jsonify(data)
     
