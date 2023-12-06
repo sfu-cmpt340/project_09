@@ -11,7 +11,12 @@ This web app allows users to upload a DICOM image and the segmented image will b
 
 
 ## Video/demo/GIF
-Demo video can be downloaded in through link:
+
+Link to the Demo Video on YouTube:
+
+https://youtu.be/l7nAdkC-3Kc
+
+Demo video can be downloaded through this link (expires Dec 12):
 https://wetransfer.com/downloads/8c6c13ec6f487d89673af8de98a160ec20231206020832/9349e0
 
 ## Table of Contents
