@@ -11,8 +11,8 @@ This web app allows users to upload a DICOM image and the segmented image will b
 
 
 ## Video/demo/GIF
-Record a short video (1:40 - 2 minutes maximum) or gif or a simple screen recording or even using PowerPoint with audio or with text, showcasing your work.
-
+Demo video can be downloaded in through link:
+https://wetransfer.com/downloads/8c6c13ec6f487d89673af8de98a160ec20231206020832/9349e0
 
 ## Table of Contents
 1. [Demo](#demo)
